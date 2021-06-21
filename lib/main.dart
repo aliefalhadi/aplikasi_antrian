@@ -1,7 +1,7 @@
 import 'package:aplikasi_antrian/configs/router/app_router.dart';
 import 'package:aplikasi_antrian/locator.dart';
 import 'package:aplikasi_antrian/pages/home.dart';
-import 'package:aplikasi_antrian/presentations/views/login/login_view.dart';
+import 'package:aplikasi_antrian/presentations/views/auth/login_view.dart';
 import 'package:aplikasi_antrian/providers/main_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:aplikasi_antrian/screen.dart';

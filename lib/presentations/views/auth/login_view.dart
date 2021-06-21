@@ -1,3 +1,4 @@
+import 'package:aplikasi_antrian/configs/constants/app_router_strings.dart';
 import 'package:aplikasi_antrian/configs/themes/app_themes.dart';
 import 'package:flutter/material.dart';
 import 'package:aplikasi_antrian/constants.dart';
@@ -14,14 +15,12 @@ class LoginView extends StatelessWidget {
           children: <Widget>[
             Container(
               width: MediaQuery.of(context).size.width,
-              color: Colors.green,
               padding: EdgeInsets.all(16),
               child: Column(
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    color: Colors.red,
-                    height: 150,
+                    child: Image.asset("images/logo.png" ,height: 250,),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 16),
@@ -32,7 +31,6 @@ class LoginView extends StatelessWidget {
                         Text(
                           "Silahkan login dengan akun yang telah terdaftar pada aplikasi antrian online",
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white),
                         )
                       ],
                     ),
@@ -81,7 +79,9 @@ class LoginView extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: OutlineButton(
                       child: Text("Daftar", style: TextStyle(color: Colors.green),),
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.pushNamed(context, AppRouterStrings.register);
+                      },
                     ),
                   )
                 ],
