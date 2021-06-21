@@ -4,11 +4,8 @@ import 'package:aplikasi_antrian/pages/home.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/login_view.dart';
 import 'package:aplikasi_antrian/providers/main_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:aplikasi_antrian/screen.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:provider/provider.dart';
-import 'providers/antrianonline_providers.dart';
-import 'providers/guru_provider.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

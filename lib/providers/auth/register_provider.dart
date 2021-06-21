@@ -7,7 +7,6 @@ class RegisterProvider extends BaseProvider{
     "nomor_hp" : "",
     "email" : "",
     "password" : "",
-    "ulangi_password" : "",
   };
 
 

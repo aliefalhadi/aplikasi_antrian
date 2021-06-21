@@ -38,6 +38,7 @@ dependencies:
   dio_http_cache:
   get_it: ^5.0.1
   intl:
+  rflutter_alert: ^1.1.0
 
 dev_dependencies:
   flutter_test:

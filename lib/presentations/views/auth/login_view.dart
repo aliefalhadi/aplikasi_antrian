@@ -44,14 +44,14 @@ class LoginView extends StatelessWidget {
                 children: [
                   TextFormField(
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.person),
+                      prefixIcon: Icon(Icons.person, color: Colors.green,),
                       hintText: "NIK KTP"
                     ),
                   ),
                   vSpace(8),
                   TextFormField(
                     decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: Icon(Icons.lock, color: Colors.green,),
                         hintText: "Kata Sandi"
                     ),
                   ),
