@@ -1,6 +1,7 @@
 import 'package:aplikasi_antrian/providers/auth/register_provider.dart';
 import 'package:aplikasi_antrian/providers/main_provider.dart';
 import 'package:aplikasi_antrian/services/api_interceptors.dart';
+import 'package:aplikasi_antrian/services/auth_service.dart';
 import 'package:get_it/get_it.dart';
 
 import 'configs/utils/shared_preference_helper.dart';
@@ -12,6 +13,7 @@ void setupLocator() {
     //services
     locator.registerLazySingleton(() => ApiInterceptors());
     locator.registerLazySingleton(() => SharedPreferencesHelper());
+    locator.registerLazySingleton(() => AuthService());
 
 
 

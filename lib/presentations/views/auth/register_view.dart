@@ -18,12 +18,14 @@ class _RegisterViewState extends State<RegisterView> {
   final _formKey = GlobalKey<FormState>();
   bool isSecurePass = true;
   bool isSecureUlangiPass = true;
+  GlobalKey<ScaffoldState> _globalKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return BaseView<RegisterProvider>(
       builder: (context, provider, child){
         return  Scaffold(
+          key: _globalKey,
           backgroundColor: Colors.white,
           body: Container(
             child: ListView(
@@ -60,6 +62,15 @@ class _RegisterViewState extends State<RegisterView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        LabelTextField(label: "Nomor KK",),
+                        TextFormField(
+                          keyboardType: TextInputType.phone,
+                          decoration: InputDecoration(
+                              hintText: "Nomor kartu Keluarga"
+                          ),
+                          validator: (String value)=> Validations.stringNullValidation(value),
+                          onChanged: (value) => provider.changedDataRegister(field: 'no_kk', value: value),
+                        ),
                         LabelTextField(label: "NIK KTP",),
                         TextFormField(
                           keyboardType: TextInputType.phone,
@@ -76,6 +87,14 @@ class _RegisterViewState extends State<RegisterView> {
                           ),
                           validator: (String value)=> Validations.stringNullValidation(value),
                           onChanged: (value) => provider.changedDataRegister(field: 'nama', value: value),
+                        ),
+                        LabelTextField(label: "Alamat",),
+                        TextFormField(
+                          decoration: InputDecoration(
+                              hintText: "Alamat"
+                          ),
+                          validator: (String value)=> Validations.stringNullValidation(value),
+                          onChanged: (value) => provider.changedDataRegister(field: 'alamat', value: value),
                         ),
                         LabelTextField(label: "Nomor Handphone",),
                         TextFormField(
@@ -148,14 +167,15 @@ class _RegisterViewState extends State<RegisterView> {
                           width: MediaQuery.of(context).size.width,
                           child: RaisedButton(
                             child: Text("Daftar"),
-                            onPressed: (){
+                            onPressed: () async{
                               FocusScope.of(context).unfocus();
                               if(_formKey.currentState.validate()){
                                 EasyLoading.show(status:'Loading...', dismissOnTap: false,maskType: EasyLoadingMaskType.black);
-                                Future.delayed(Duration(seconds: 3), (){
-                                  EasyLoading.dismiss();
+                                bool res = await provider.registerWithCredentials();
+                                EasyLoading.dismiss();
+                                if(res){
                                   Alert(
-                                    context: context,
+                                    context: _globalKey.currentContext,
                                     type: AlertType.success,
                                     title: "Registrasi Akun Berhasil",
                                     desc: "Silahkan login menggunakan nik dan password yang telah didaftarkan",
@@ -165,12 +185,14 @@ class _RegisterViewState extends State<RegisterView> {
                                           "Login",
                                           style: TextStyle(color: Colors.white, fontSize: 20),
                                         ),
-                                        onPressed: () => Navigator.popUntil(context, (route) => route.isFirst),
+                                        onPressed: () => Navigator.popUntil(_globalKey.currentContext, (route) => route.isFirst),
                                         width: 120,
                                       )
                                     ],
                                   ).show();
-                                });
+                                }else{
+                                 EasyLoading.showToast("Registrasi akun gagal, silahkan coba lagi");
+                                }
                               }
                             },
                           ),
