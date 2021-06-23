@@ -1,5 +1,6 @@
 import 'package:aplikasi_antrian/configs/constants/app_router_strings.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/register_view.dart';
+import 'package:aplikasi_antrian/presentations/views/home/home.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
@@ -8,6 +9,9 @@ class AppRouter {
     switch (routeSettings.name) {
       case AppRouterStrings.register:
         return MaterialPageRoute(builder: (_) => RegisterView());
+        break;
+      case AppRouterStrings.home:
+        return MaterialPageRoute(builder: (_) => HomeScreen());
         break;
       default:
         return null;

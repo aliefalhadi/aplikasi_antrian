@@ -1,3 +1,4 @@
+import 'package:aplikasi_antrian/providers/auth/login_provider.dart';
 import 'package:aplikasi_antrian/providers/auth/register_provider.dart';
 import 'package:aplikasi_antrian/providers/main_provider.dart';
 import 'package:aplikasi_antrian/services/api_interceptors.dart';
@@ -20,4 +21,5 @@ void setupLocator() {
     // provider
     locator.registerFactory(() => MainProvider());
     locator.registerFactory(() => RegisterProvider());
+    locator.registerFactory(() => LoginProvider());
 }
