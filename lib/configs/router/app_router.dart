@@ -1,5 +1,6 @@
 import 'package:aplikasi_antrian/configs/constants/app_router_strings.dart';
 import 'package:aplikasi_antrian/presentations/views/antrian/ambil_antrian.dart';
+import 'package:aplikasi_antrian/presentations/views/antrian/cek_antrian.dart';
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_instansi.dart';
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_layanan_instansi.dart';
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_waktu_kunjungan.dart';
@@ -20,6 +21,9 @@ class AppRouter {
         break;
       case AppRouterStrings.ambilAntrian:
         return MaterialPageRoute(builder: (_) => AmbilAntrian());
+        break;
+      case AppRouterStrings.cekAntrian:
+        return MaterialPageRoute(builder: (_) => CekAntrian());
         break;
       case AppRouterStrings.pilihInstansi:
         return MaterialPageRoute(builder: (_) => PilihInstansi());

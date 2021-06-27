@@ -22,4 +22,6 @@ class AppRouterStrings {
   static const String pilihLayananInstansi = 'antrian/pilih/layanan-instansi';
 
   static const String pilihWaktuKunjungan = 'antrian/pilih/waktu-kunjungan';
+
+  static const String cekAntrian = 'antrian/cek';
 }

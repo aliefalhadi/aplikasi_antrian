@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:aplikasi_antrian/models/cek_daftar_antrian_model.dart';
+import 'package:aplikasi_antrian/models/daftar_antrian_aktif_model.dart';
 import 'package:aplikasi_antrian/models/daftar_instansi_model.dart';
 import 'package:aplikasi_antrian/models/daftar_layanan_instansi_model.dart';
 import 'package:aplikasi_antrian/services/service.dart';
@@ -68,6 +69,36 @@ class AntrianService extends Service{
         }
 
         return cekDaftarAntrianModel;
+      } else {
+        throw ('data tidak ditemukan');
+      }
+    } on SocketException catch (_) {
+      throw SocketException('no_internet');
+    } catch (error) {
+      if (error is DioError) {
+        print(error.response.statusCode);
+        throw (error.response.statusCode);
+      }
+    }
+  }
+
+  Future postDaftarAntrianAktif(var data) async {
+    try {
+      var url = '/antrians/cek-antrian';
+
+      print(data);
+
+      var response = await post(url, data);
+
+      if (response.statusCode == 200) {
+        DaftarAntrianAktifModel daftarAntrianAktifModel =
+        daftarAntrianAktifModelFromJson(jsonEncode(response.data));
+
+        if(daftarAntrianAktifModel.data.isEmpty){
+          throw ('data tidak ditemukan');
+        }
+
+        return daftarAntrianAktifModel;
       } else {
         throw ('data tidak ditemukan');
       }

@@ -102,7 +102,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushNamed(AppRouterStrings.ambilAntrian);
+                    Navigator.of(context).pushNamed(AppRouterStrings.cekAntrian);
                   },
                   child: Image.asset(
                     'images/list.png',

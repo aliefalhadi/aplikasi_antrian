@@ -5,6 +5,7 @@ import 'package:aplikasi_antrian/configs/constants/view_state.dart';
 import 'package:aplikasi_antrian/configs/utils/shared_preference_helper.dart';
 import 'package:aplikasi_antrian/locator.dart';
 import 'package:aplikasi_antrian/models/cek_daftar_antrian_model.dart';
+import 'package:aplikasi_antrian/models/daftar_antrian_aktif_model.dart';
 import 'package:aplikasi_antrian/models/daftar_instansi_model.dart';
 import 'package:aplikasi_antrian/models/daftar_layanan_instansi_model.dart';
 import 'package:aplikasi_antrian/models/data_token_login_model.dart';
@@ -19,17 +20,28 @@ class AntrianProvider extends BaseProvider{
   DaftarInstansiModel daftarInstansiModel;
   DaftarLayananInstansiModel daftarLayananInstansiModel;
   CekDaftarAntrianModel cekDaftarAntrianModel;
+  DaftarAntrianAktifModel daftarAntrianAktifModel;
   Map dataAntrian = {
     "id_instansi" : "",
     "id_layanan_instansi" : "",
     "waktu_kunjungan" : "",
     "id_pengunjung" : ""
   };
+
+  Map dataCekAntrian = {
+    "id_instansi" : "",
+    "id_layanan_instansi" : ""
+  };
+
   bool isFormLengkap = false;
 
 
   void changedDataAntrian({String field, String value}){
     this.dataAntrian[field] = value;
+  }
+
+  void changedDataCekAntrian({String field, String value}){
+    this.dataCekAntrian[field] = value;
   }
 
   Future getDaftarInstansi() async {
@@ -102,6 +114,17 @@ class AntrianProvider extends BaseProvider{
     } on Exception catch (e) {
       // emit(state.copyWith(status: FormzStatus.submissionFailure, exceptionError: e.toString()));
       return false;
+    }
+  }
+
+  Future postCekAntrianAktif() async {
+    try {
+      daftarAntrianAktifModel  = await _antrianService.postDaftarAntrianAktif(jsonEncode(this.dataCekAntrian));
+
+      return daftarAntrianAktifModel;
+    } on Exception catch (e) {
+      // emit(state.copyWith(status: FormzStatus.submissionFailure, exceptionError: e.toString()));
+      return null;
     }
   }
 
