@@ -1,3 +1,4 @@
+import 'package:aplikasi_antrian/presentations/views/home/histori_antrian.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class _MainState extends State<HomeApp> {
   final List<PageItem> _items = [
     PageItem('Home', Icons.home, HomeScreen(key: PageStorageKey('key--home'))),
     PageItem('History', Icons.history,
-        HistoryScreen(key: PageStorageKey('key--history'))),
+        HistoriAntrian(key: PageStorageKey('key--history'))),
     PageItem('Notifications', Icons.notifications,
         NotificationsScreen(key: PageStorageKey('key--notifications'))),
     PageItem('Account', Icons.account_circle,

@@ -5,11 +5,7 @@ class HistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Container(
-    //   child: Center(
-    //     child: Text('Welcome to History'),
-    //   ),
-    // );
+
     final descTextStyle = TextStyle(
       color: Colors.black,
       fontWeight: FontWeight.w300,

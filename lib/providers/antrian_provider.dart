@@ -6,9 +6,11 @@ import 'package:aplikasi_antrian/configs/utils/shared_preference_helper.dart';
 import 'package:aplikasi_antrian/locator.dart';
 import 'package:aplikasi_antrian/models/cek_daftar_antrian_model.dart';
 import 'package:aplikasi_antrian/models/daftar_antrian_aktif_model.dart';
+import 'package:aplikasi_antrian/models/daftar_histori_antrian_model.dart';
 import 'package:aplikasi_antrian/models/daftar_instansi_model.dart';
 import 'package:aplikasi_antrian/models/daftar_layanan_instansi_model.dart';
 import 'package:aplikasi_antrian/models/data_token_login_model.dart';
+import 'package:aplikasi_antrian/models/detail_histori_antrian_model.dart';
 import 'package:aplikasi_antrian/providers/base_provider.dart';
 import 'package:aplikasi_antrian/services/antrian_service.dart';
 import 'package:aplikasi_antrian/services/auth_service.dart';
@@ -34,6 +36,9 @@ class AntrianProvider extends BaseProvider{
   };
 
   bool isFormLengkap = false;
+
+  DaftarHistoriAntrianModel daftarHistoriAntrianModel;
+  DetailHistoriAntrianModel detailHistoriAntrianModel;
 
 
   void changedDataAntrian({String field, String value}){
@@ -128,4 +133,42 @@ class AntrianProvider extends BaseProvider{
     }
   }
 
+
+  Future getHistoriAntrian() async {
+    try {
+      setState(ViewState.Fetching);
+      daftarHistoriAntrianModel  = await _antrianService.getDaftarHistoriAntrian();
+      if(daftarHistoriAntrianModel.data.isEmpty){
+        setState(ViewState.FetchNull);
+      }
+      setState(ViewState.Idle);
+    }  on SocketException catch(e){
+      setState(ViewState.ErrConnection);
+    }
+    catch (e) {
+      if(e == 404 || e == 502 || e == 503){
+        setState(ViewState.ErrConnection);
+      }else{
+        setState(ViewState.FetchNull);
+      }
+    }
+  }
+
+
+  Future getDetailHistoriAntrian(String idAntrian) async {
+    try {
+      setState(ViewState.Fetching);
+      detailHistoriAntrianModel  = await _antrianService.getDetailHistoriAntrian(idAntrian: idAntrian);
+      setState(ViewState.Idle);
+    }  on SocketException catch(e){
+      setState(ViewState.ErrConnection);
+    }
+    catch (e) {
+      if(e == 404 || e == 502 || e == 503){
+        setState(ViewState.ErrConnection);
+      }else{
+        setState(ViewState.FetchNull);
+      }
+    }
+  }
 }

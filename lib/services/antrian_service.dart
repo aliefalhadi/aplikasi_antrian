@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:aplikasi_antrian/models/cek_daftar_antrian_model.dart';
 import 'package:aplikasi_antrian/models/daftar_antrian_aktif_model.dart';
+import 'package:aplikasi_antrian/models/daftar_histori_antrian_model.dart';
 import 'package:aplikasi_antrian/models/daftar_instansi_model.dart';
 import 'package:aplikasi_antrian/models/daftar_layanan_instansi_model.dart';
+import 'package:aplikasi_antrian/models/detail_histori_antrian_model.dart';
 import 'package:aplikasi_antrian/services/service.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AntrianService extends Service{
   Future getDaftarInstansi() async {
@@ -120,6 +123,60 @@ class AntrianService extends Service{
 
       if (response.statusCode == 201) {
         return response;
+      } else {
+        throw ('data tidak ditemukan');
+      }
+    } on SocketException catch (_) {
+      throw SocketException('no_internet');
+    } catch (error) {
+      if (error is DioError) {
+        print(error.response.statusCode);
+        throw (error.response.statusCode);
+      }
+    }
+  }
+
+  Future getDaftarHistoriAntrian() async {
+    try {
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      String nik = sharedPreferences.getString('nik');
+      var url = '/antrians/histori-antrian/'+nik;
+
+      var response = await get(url);
+
+      if (response.statusCode == 200) {
+        DaftarHistoriAntrianModel daftarHistoriAntrianModel =
+        daftarHistoriAntrianModelFromJson(jsonEncode(response.data));
+
+        if(daftarHistoriAntrianModel.data.isEmpty){
+          throw ('data tidak ditemukan');
+        }
+
+        return daftarHistoriAntrianModel;
+      } else {
+        throw ('data tidak ditemukan');
+      }
+    } on SocketException catch (_) {
+      throw SocketException('no_internet');
+    } catch (error) {
+      if (error is DioError) {
+        print(error.response.statusCode);
+        throw (error.response.statusCode);
+      }
+    }
+  }
+
+  Future getDetailHistoriAntrian({String idAntrian}) async {
+    try {
+      var url = '/antrians/detail-histori-antrian/'+idAntrian;
+
+      var response = await get(url);
+
+      if (response.statusCode == 200) {
+        DetailHistoriAntrianModel detailHistoriAntrianModel =
+        detailHistoriAntrianModelFromJson(jsonEncode(response.data));
+
+        return detailHistoriAntrianModel;
       } else {
         throw ('data tidak ditemukan');
       }
