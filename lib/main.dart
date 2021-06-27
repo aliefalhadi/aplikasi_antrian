@@ -2,6 +2,7 @@ import 'package:aplikasi_antrian/configs/router/app_router.dart';
 import 'package:aplikasi_antrian/locator.dart';
 import 'package:aplikasi_antrian/pages/home.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/login_view.dart';
+import 'package:aplikasi_antrian/presentations/views/home/home_app.dart';
 import 'package:aplikasi_antrian/providers/main_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -24,6 +25,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primaryColor: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         buttonTheme: ButtonThemeData(
           buttonColor: Colors.green,
@@ -39,7 +41,7 @@ class App extends StatelessWidget {
             )
         ),
       ),
-      home: initialRoute == 'login' ? LoginView() : HomeScreen(),
+      home: initialRoute == 'login' ? LoginView() : HomeApp(),
       onGenerateRoute: AppRouter().onGenerateRoute,
       builder: EasyLoading.init(),
     );

@@ -1,12 +1,9 @@
+import 'package:aplikasi_antrian/presentations/views/home/home.dart';
 import 'package:flutter/material.dart';
-// import 'package:aplikasi_antrian/pages/home.dart';
-import 'screen.dart';
 
-import './pages/home.dart';
-import './pages/history.dart';
-import './pages/notifikasi.dart';
-import './pages/account.dart';
-import './pages/fasilitas.dart';
+import '../../../pages/history.dart';
+import '../../../pages/notifikasi.dart';
+import '../../../pages/account.dart';
 
 class HomeApp extends StatefulWidget {
   @override
@@ -31,6 +28,7 @@ class _MainState extends State<HomeApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.green,
         title: Text('Antrian Online MPP'),
       ),
       body: PageStorage(

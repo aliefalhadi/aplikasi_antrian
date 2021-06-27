@@ -3,7 +3,7 @@ import 'package:aplikasi_antrian/pages/notifikasi.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'history.dart';
-import 'package:aplikasi_antrian/home_app.dart';
+import 'package:aplikasi_antrian/presentations/views/home/home_app.dart';
 import 'package:aplikasi_antrian/url_launcher.dart';
 
 class InstansiScreen extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:aplikasi_antrian/pages/home.dart';
-import 'package:aplikasi_antrian/home_app.dart';
+import 'package:aplikasi_antrian/presentations/views/home/home_app.dart';
 import 'dart:async';
-import 'home_app.dart';
+import 'presentations/views/home/home_app.dart';
 
 class SplashScreenPage extends StatefulWidget {
   @override

@@ -3,7 +3,7 @@ import 'home.dart';
 import 'history.dart';
 import 'notifikasi.dart';
 import 'account.dart';
-import 'package:aplikasi_antrian/home_app.dart';
+import 'package:aplikasi_antrian/presentations/views/home/home_app.dart';
 
 class FasilitasScreen extends StatelessWidget {
   final PageStorageBucket _bucket = PageStorageBucket();

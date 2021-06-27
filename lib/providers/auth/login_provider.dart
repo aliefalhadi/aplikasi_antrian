@@ -23,7 +23,7 @@ class LoginProvider extends BaseProvider{
     try {
       Response res = await _authService.postLogin(jsonEncode(this.dataLogin));
       print(res);
-      if(res.data != null){
+      if(res != null){
         await locator<SharedPreferencesHelper>().storeValueBool('isLogin', true);
         await locator<SharedPreferencesHelper>().storeValueString('token', res.data['token']);
 
