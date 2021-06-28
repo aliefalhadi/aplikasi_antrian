@@ -7,6 +7,8 @@ import '../../../pages/notifikasi.dart';
 import '../../../pages/account.dart';
 
 class HomeApp extends StatefulWidget {
+  final int page;
+  HomeApp({this.page = 0});
   @override
   _MainState createState() => _MainState();
 }
@@ -23,7 +25,14 @@ class _MainState extends State<HomeApp> {
         AccountScreen(key: PageStorageKey('key--account'))),
   ];
 
-  int _activeScreenIndex = 0;
+  int _activeScreenIndex;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _activeScreenIndex = widget.page;
+  }
 
   @override
   Widget build(BuildContext context) {

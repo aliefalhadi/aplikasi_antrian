@@ -18,7 +18,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => RegisterView());
         break;
       case AppRouterStrings.home:
-        return MaterialPageRoute(builder: (_) => HomeApp());
+        String page = routeSettings.arguments == null ? 0 : routeSettings.arguments;
+        return MaterialPageRoute(builder: (_) => HomeApp(page: int.parse(page),));
         break;
       case AppRouterStrings.ambilAntrian:
         return MaterialPageRoute(builder: (_) => AmbilAntrian());

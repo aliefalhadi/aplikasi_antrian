@@ -164,7 +164,7 @@ class _AmbilAntrianState extends State<AmbilAntrian> {
                                                         "OK",
                                                         style: TextStyle(color: Colors.white, fontSize: 20),
                                                       ),
-                                                      onPressed: () => Navigator.pushNamedAndRemoveUntil(_globalKey.currentContext, AppRouterStrings.home, (route) => false),
+                                                      onPressed: () => Navigator.pushNamedAndRemoveUntil(_globalKey.currentContext, AppRouterStrings.home, (route) => false, arguments: '1'),
                                                       width: 120,
                                                     )
                                                   ],
