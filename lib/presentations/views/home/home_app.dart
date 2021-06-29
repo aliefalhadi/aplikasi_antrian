@@ -1,5 +1,6 @@
 import 'package:aplikasi_antrian/presentations/views/home/histori_antrian.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home.dart';
+import 'package:aplikasi_antrian/presentations/views/home/profile.dart';
 import 'package:flutter/material.dart';
 
 import '../../../pages/history.dart';
@@ -22,7 +23,7 @@ class _MainState extends State<HomeApp> {
     PageItem('Notifications', Icons.notifications,
         NotificationsScreen(key: PageStorageKey('key--notifications'))),
     PageItem('Account', Icons.account_circle,
-        AccountScreen(key: PageStorageKey('key--account'))),
+        Profile(key: PageStorageKey('key--account'))),
   ];
 
   int _activeScreenIndex;
