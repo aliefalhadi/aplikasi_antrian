@@ -103,7 +103,7 @@ class _RegisterViewState extends State<RegisterView> {
                               hintText: "Nomor Handphone"
                           ),
                           validator: (String value)=> Validations.stringNullValidation(value),
-                          onChanged: (value) => provider.changedDataRegister(field: 'nomor_hp', value: value),
+                          onChanged: (value) => provider.changedDataRegister(field: 'no_hp', value: value),
                         ),
                         LabelTextField(label: "Email",),
                         TextFormField(

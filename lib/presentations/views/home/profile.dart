@@ -124,7 +124,6 @@ class _ProfileState extends State<Profile> {
                                       EasyLoading.dismiss();
                                       if(res){
                                         EasyLoading.showToast("Edit data berhasil");
-                                        Navigator.pushNamedAndRemoveUntil(context, AppRouterStrings.home, (route) => false, arguments: '3');
                                       }else{
                                         EasyLoading.showToast("Edit data gagal, silahkan coba lagi");
                                       }
