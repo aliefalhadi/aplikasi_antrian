@@ -1,11 +1,9 @@
 import 'package:aplikasi_antrian/presentations/views/home/histori_antrian.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home.dart';
+import 'package:aplikasi_antrian/presentations/views/home/notifikasi.dart';
 import 'package:aplikasi_antrian/presentations/views/home/profile.dart';
 import 'package:flutter/material.dart';
 
-import '../../../pages/history.dart';
-import '../../../pages/notifikasi.dart';
-import '../../../pages/account.dart';
 
 class HomeApp extends StatefulWidget {
   final int page;

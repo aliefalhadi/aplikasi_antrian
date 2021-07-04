@@ -8,8 +8,8 @@ import 'package:aplikasi_antrian/locator.dart';
 
 class Service {
   Dio dio = locator<ApiInterceptors>().dio;
-  // String baseUrl = 'http://192.168.1.12/antrian_backend/api/v1';
-  String baseUrl = 'http://api.antrian.aiiviii.biz.id/v1';
+  String baseUrl = 'http://192.168.1.12/antrian_backend/api/v1';
+  // String baseUrl = 'http://api.antrian.aiiviii.biz.id/v1';
 
 
   Future get(String url) async {

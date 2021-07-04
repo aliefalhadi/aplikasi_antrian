@@ -57,6 +57,8 @@ class AuthService extends Service{
 
       var response = await get(url);
 
+      print(response.statusCode.toString());
+
       if (response.statusCode == 200) {
         DetailUserModel detailUserModel =
         detailUserModelFromJson(jsonEncode(response.data));

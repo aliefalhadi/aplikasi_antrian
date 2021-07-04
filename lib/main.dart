@@ -1,19 +1,40 @@
+import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:aplikasi_antrian/configs/router/app_router.dart';
+import 'package:aplikasi_antrian/configs/utils/shared_preference_helper.dart';
 import 'package:aplikasi_antrian/locator.dart';
-import 'package:aplikasi_antrian/pages/home.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/login_view.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home_app.dart';
 import 'package:aplikasi_antrian/providers/main_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void cekAntrian() async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  if (sharedPreferences.containsKey('isLogin')) {
+    String nik = sharedPreferences.getString('nik');
+    String baseUrl = 'http://192.168.1.12/antrian_backend/api/v1';
+    var url = baseUrl+ '/notifications/cek-antrian/'+nik;
+
+    var  response = await get(url);
+
+    print('send API cron');
+  }
+
+}
+
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  final int helloAlarmID = 0;
+  await AndroidAlarmManager.initialize();
+
   setupLocator();
   MainProvider mainProvider = locator<MainProvider>();
-  mainProvider.onStartApp().then((value){
-    return runApp(App(initialRoute: value,));
+  mainProvider.onStartApp().then((value) async{
+     runApp(App(initialRoute: value,));
+     await AndroidAlarmManager.periodic(const Duration(minutes: 1), helloAlarmID, cekAntrian);
   });
 }
 

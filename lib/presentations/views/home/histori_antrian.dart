@@ -4,6 +4,7 @@ import 'package:aplikasi_antrian/configs/utils/convert_handlers.dart';
 import 'package:aplikasi_antrian/presentations/views/base_view.dart';
 import 'package:aplikasi_antrian/providers/antrian_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HistoriAntrian extends StatelessWidget {
   const HistoriAntrian({Key key}) : super(key: key);
@@ -43,9 +44,11 @@ class HistoriAntrian extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('Instansi: '+provider.daftarHistoriAntrianModel.data[index].instansi.namaInstansi),
                                 Text('Layanan: '+provider.daftarHistoriAntrianModel.data[index].jenisLayanan.jlNama),
+                                Text('Tanggal: '+ DateFormat('dd MMM yyyy').format(provider.daftarHistoriAntrianModel.data[index].antrian.antrianTgl)),
                                 Text('Waktu: '+provider.daftarHistoriAntrianModel.data[index].antrianOnline.aoWaktu),
                                 Text('Status: '+ConverHandlers().convertStatusAntrian(provider.daftarHistoriAntrianModel.data[index].antrian.antrianStatus.toString())),
                               ],
