@@ -5,6 +5,7 @@ import 'package:aplikasi_antrian/presentations/views/base_view.dart';
 import 'package:aplikasi_antrian/providers/antrian_provider.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DetailHistoriAntrian extends StatelessWidget {
   final String idAntrian;
@@ -50,6 +51,18 @@ class DetailHistoriAntrian extends StatelessWidget {
                     contentPadding: EdgeInsets.zero,
                     title: Text("Layanan", style: TextStyle(fontSize: 14, color: Colors.grey),),
                     subtitle: Text(provider.detailHistoriAntrianModel.data.jenisLayanan.jlNama, style: TextStyle(fontSize: 16,color: Colors.black)),
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: Colors.grey.withOpacity(0.2))
+                      )
+                  ),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: Text("Tanggal", style: TextStyle(fontSize: 14, color: Colors.grey),),
+                    subtitle: Text(DateFormat('dd MMM yyyy').format(provider.detailHistoriAntrianModel.data.antrian.antrianTgl), style: TextStyle(fontSize: 16,color: Colors.black)),
                   ),
                 ),
                 Container(

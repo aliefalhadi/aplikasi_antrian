@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:aplikasi_antrian/models/cek_antrian_harian_model.dart';
 import 'package:aplikasi_antrian/models/cek_daftar_antrian_model.dart';
 import 'package:aplikasi_antrian/models/daftar_antrian_aktif_model.dart';
 import 'package:aplikasi_antrian/models/daftar_histori_antrian_model.dart';
@@ -177,6 +178,33 @@ class AntrianService extends Service{
         detailHistoriAntrianModelFromJson(jsonEncode(response.data));
 
         return detailHistoriAntrianModel;
+      } else {
+        throw ('data tidak ditemukan');
+      }
+    } on SocketException catch (_) {
+      throw SocketException('no_internet');
+    } catch (error) {
+      if (error is DioError) {
+        print(error.response.statusCode);
+        throw (error.response.statusCode);
+      }
+    }
+  }
+
+
+  Future getCekAntrianHarian() async {
+    try {
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      String nik = sharedPreferences.getString('nik');
+
+      var url = '/antrians/cek-antrian-harian/'+nik;
+
+      var response = await get(url);
+
+      if (response.statusCode == 200) {
+        CekAntrianHarianModel cekAntrianHarianModel =
+        cekAntrianHarianModelFromJson(jsonEncode(response.data));
+        return cekAntrianHarianModel;
       } else {
         throw ('data tidak ditemukan');
       }
