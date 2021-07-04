@@ -34,7 +34,7 @@ void main() async{
   MainProvider mainProvider = locator<MainProvider>();
   mainProvider.onStartApp().then((value) async{
      runApp(App(initialRoute: value,));
-     await AndroidAlarmManager.periodic(const Duration(minutes: 1), helloAlarmID, cekAntrian);
+     await AndroidAlarmManager.periodic(const Duration(hours: 1) ,helloAlarmID, cekAntrian,wakeup: true);
   });
 }
 

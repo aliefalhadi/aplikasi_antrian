@@ -6,6 +6,7 @@ import 'package:aplikasi_antrian/models/data_token_login_model.dart';
 import 'package:aplikasi_antrian/providers/base_provider.dart';
 import 'package:aplikasi_antrian/services/auth_service.dart';
 import 'package:dio/dio.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class LoginProvider extends BaseProvider{
   AuthService _authService = locator<AuthService>();
@@ -38,6 +39,10 @@ class LoginProvider extends BaseProvider{
         await locator<SharedPreferencesHelper>().storeValueString('nama', dataTokenLoginModel.data.nama.toString());
         await locator<SharedPreferencesHelper>().storeValueString('no_hp', dataTokenLoginModel.data.noHp.toString());
 
+        await Future.wait([
+          OneSignal.shared.sendTag("idUser", dataTokenLoginModel.data.idUser.toString()),
+          OneSignal.shared.sendTag("nik", dataTokenLoginModel.data.nik.toString()),
+        ]);
 
         return true;
       }else{

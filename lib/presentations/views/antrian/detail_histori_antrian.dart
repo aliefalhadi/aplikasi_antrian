@@ -101,7 +101,7 @@ class DetailHistoriAntrian extends StatelessWidget {
                 vSpace(32),
                 BarcodeWidget(
                   barcode: Barcode.qrCode(),
-                  data: "Hello word",
+                  data: provider.detailHistoriAntrianModel.data.antrianOnline.aoId.toString()+" MPP",
                 )
               ],
             ),

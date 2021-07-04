@@ -1,8 +1,10 @@
+import 'package:aplikasi_antrian/configs/constants/app_router_strings.dart';
 import 'package:aplikasi_antrian/presentations/views/home/histori_antrian.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home.dart';
 import 'package:aplikasi_antrian/presentations/views/home/notifikasi.dart';
 import 'package:aplikasi_antrian/presentations/views/home/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 
 class HomeApp extends StatefulWidget {
@@ -31,7 +33,23 @@ class _MainState extends State<HomeApp> {
     // TODO: implement initState
     super.initState();
     _activeScreenIndex = widget.page;
-  }
+
+    OneSignal.shared
+        .setNotificationOpenedHandler((OSNotificationOpenedResult result) {
+      print('ada notifffff killlikkk');
+      if (result.notification.payload.additionalData['type'] == 'antrian') {
+        Navigator.pushNamedAndRemoveUntil(context, AppRouterStrings.home, (route) => false, arguments: '1');
+      }
+    });
+
+    //    handle ketika ada notif
+    OneSignal.shared
+        .setNotificationReceivedHandler((OSNotification notification) async {
+
+
+      });
+    }
+
 
   @override
   Widget build(BuildContext context) {
