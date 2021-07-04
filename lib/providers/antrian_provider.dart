@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:aplikasi_antrian/configs/constants/app_router_strings.dart';
 import 'package:aplikasi_antrian/configs/constants/view_state.dart';
 import 'package:aplikasi_antrian/configs/utils/shared_preference_helper.dart';
 import 'package:aplikasi_antrian/locator.dart';
+import 'package:aplikasi_antrian/models/cek_antrian_harian_model.dart';
 import 'package:aplikasi_antrian/models/cek_daftar_antrian_model.dart';
 import 'package:aplikasi_antrian/models/daftar_antrian_aktif_model.dart';
 import 'package:aplikasi_antrian/models/daftar_histori_antrian_model.dart';
@@ -15,6 +17,8 @@ import 'package:aplikasi_antrian/providers/base_provider.dart';
 import 'package:aplikasi_antrian/services/antrian_service.dart';
 import 'package:aplikasi_antrian/services/auth_service.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AntrianProvider extends BaseProvider{
@@ -23,6 +27,7 @@ class AntrianProvider extends BaseProvider{
   DaftarLayananInstansiModel daftarLayananInstansiModel;
   CekDaftarAntrianModel cekDaftarAntrianModel;
   DaftarAntrianAktifModel daftarAntrianAktifModel;
+  CekAntrianHarianModel cekAntrianHarianModel;
   Map dataAntrian = {
     "id_instansi" : "",
     "id_layanan_instansi" : "",
@@ -47,6 +52,29 @@ class AntrianProvider extends BaseProvider{
 
   void changedDataCekAntrian({String field, String value}){
     this.dataCekAntrian[field] = value;
+  }
+
+  Future<CekAntrianHarianModel> getCekAntrianHarianUser(BuildContext context) async {
+    try {
+      setState(ViewState.Fetching);
+      cekAntrianHarianModel  = await _antrianService.getCekAntrianHarian();
+
+      if(cekAntrianHarianModel.data != null){
+        Navigator.pushNamedAndRemoveUntil(context, AppRouterStrings.home, (route) => false, arguments: '1');
+        EasyLoading.showToast('Anda telah mengambil antrian hari ini');
+      }
+
+      setState(ViewState.Idle);
+    }  on SocketException catch(e){
+      setState(ViewState.ErrConnection);
+    }
+    catch (e) {
+      if(e == 404 || e == 502 || e == 503){
+        setState(ViewState.ErrConnection);
+      }else{
+        setState(ViewState.FetchNull);
+      }
+    }
   }
 
   Future getDaftarInstansi() async {

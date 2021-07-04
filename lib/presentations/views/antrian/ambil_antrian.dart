@@ -1,4 +1,5 @@
 import 'package:aplikasi_antrian/configs/constants/app_router_strings.dart';
+import 'package:aplikasi_antrian/configs/constants/view_state.dart';
 import 'package:aplikasi_antrian/configs/themes/app_themes.dart';
 import 'package:aplikasi_antrian/configs/utils/validations.dart';
 import 'package:aplikasi_antrian/presentations/views/base_view.dart';
@@ -34,13 +35,18 @@ class _AmbilAntrianState extends State<AmbilAntrian> {
   @override
   Widget build(BuildContext context) {
     return BaseView<AntrianProvider>(
+      onModelReady: (model)=> model.getCekAntrianHarianUser(context),
       builder: (context, provider, child){
         return Scaffold(
           key: _globalKey,
           appBar: AppBar(
             title: Text("Ambil Antrian Online MPP"),
           ),
-          body: Container(
+          body:
+          provider.state == ViewState.Fetching ?
+              Center(child: CircularProgressIndicator(),)
+              :
+          Container(
             padding: EdgeInsets.all(16),
             child: ListView(
               children: [
