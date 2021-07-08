@@ -5,6 +5,7 @@ import 'package:aplikasi_antrian/presentations/views/antrian/detail_histori_antr
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_instansi.dart';
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_layanan_instansi.dart';
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_waktu_kunjungan.dart';
+import 'package:aplikasi_antrian/presentations/views/auth/login_view.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/register_view.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home_app.dart';
@@ -14,6 +15,9 @@ class AppRouter {
 
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+      case AppRouterStrings.login:
+        return MaterialPageRoute(builder: (_) => LoginView());
+        break;
       case AppRouterStrings.register:
         return MaterialPageRoute(builder: (_) => RegisterView());
         break;

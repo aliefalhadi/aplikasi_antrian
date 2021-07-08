@@ -15,7 +15,7 @@ void cekAntrian() async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   if (sharedPreferences.containsKey('isLogin')) {
     String nik = sharedPreferences.getString('nik');
-    String baseUrl = 'http://192.168.1.12/antrian_backend/api/v1';
+    String baseUrl = 'http://api.antrian.aiiviii.biz.id/v1';
     var url = baseUrl+ '/notifications/cek-antrian/'+nik;
 
     var  response = await get(url);
@@ -23,6 +23,10 @@ void cekAntrian() async {
     print('send API cron');
   }
 
+}
+
+void halo() async {
+  print('halooo');
 }
 
 void main() async{
@@ -34,7 +38,20 @@ void main() async{
   MainProvider mainProvider = locator<MainProvider>();
   mainProvider.onStartApp().then((value) async{
      runApp(App(initialRoute: value,));
-     await AndroidAlarmManager.periodic(const Duration(hours: 1) ,helloAlarmID, cekAntrian,wakeup: true);
+     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+     if(!sharedPreferences.containsKey('alarm3')){
+       DateTime now = DateTime.now();
+       int jam = now.hour;
+       await AndroidAlarmManager.periodic(
+         const Duration(hours: 1) ,
+         helloAlarmID,
+           cekAntrian,
+         rescheduleOnReboot: true,
+           wakeup: true ,
+           startAt: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, jam+1, 0)
+       );
+       sharedPreferences.setBool('alarm3', true);
+     }
   });
 }
 
