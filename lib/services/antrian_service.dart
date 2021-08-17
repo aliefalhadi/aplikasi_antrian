@@ -16,6 +16,8 @@ class AntrianService extends Service{
     try {
       var url = '/antrians/daftar-instansi';
 
+      //pos, get, put, delete
+
       var response = await get(url);
 
       if (response.statusCode == 200) {

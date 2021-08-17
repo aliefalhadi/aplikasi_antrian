@@ -16,6 +16,7 @@ class HomeApp extends StatefulWidget {
 
 class _MainState extends State<HomeApp> {
   final PageStorageBucket _bucket = PageStorageBucket();
+
   final List<PageItem> _items = [
     PageItem('Home', Icons.home, HomeScreen(key: PageStorageKey('key--home'))),
     PageItem('History', Icons.history,

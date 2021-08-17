@@ -3,9 +3,16 @@ import 'dart:developer';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesHelper{
+  // SharedPreferences itu library untuk menyimpan data local hp
+  // misalnya data dia login atau belum
+  // data user yg sedang login
+  //  storeValueString('username', 'khika');
+  //  String username = await getValue('username');
+
   SharedPreferences sharedPreferences;
+
   Future storeValueString(String key,String value) async {
-    sharedPreferences=await SharedPreferences.getInstance();
+    sharedPreferences= await SharedPreferences.getInstance();
     sharedPreferences.setString(key, value);
   }
 
@@ -13,6 +20,7 @@ class SharedPreferencesHelper{
     sharedPreferences=await SharedPreferences.getInstance();
     sharedPreferences.setBool(key, value);
   }
+
   Future checkKey(String key) async {
     sharedPreferences=await SharedPreferences.getInstance();
     if(sharedPreferences.containsKey(key)){
@@ -21,6 +29,7 @@ class SharedPreferencesHelper{
       return false;
     }
   }
+
   Future getValueBool(String key) async {
     sharedPreferences=await SharedPreferences.getInstance();
     return sharedPreferences.getBool(key);
@@ -29,6 +38,7 @@ class SharedPreferencesHelper{
     sharedPreferences=await SharedPreferences.getInstance();
     return sharedPreferences.getString(key);
   }
+
   Future deleteValue(String key)async{
     sharedPreferences=await SharedPreferences.getInstance();
     if(sharedPreferences.containsKey(key)){

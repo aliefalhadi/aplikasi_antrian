@@ -17,6 +17,9 @@ class PilihInstansi extends StatelessWidget {
             title: Text("Pilih Instansi"),
           ),
           body:
+          provider.state == ViewState.FetchNull ?
+          Center(child: Text('data tidak ada'),)
+              :
           provider.state == ViewState.Fetching ?
               Center(child: CircularProgressIndicator(),)
               :
@@ -28,7 +31,7 @@ class PilihInstansi extends StatelessWidget {
                 return  InkWell(
                   onTap: (){
                     Navigator.pop(context, {
-                      'id_instansi' :provider.daftarInstansiModel.data[index].instansiId,
+                      'id_instansi' : provider.daftarInstansiModel.data[index].instansiId,
                       'nama_instansi' :provider.daftarInstansiModel.data[index].instansiNama,
                     });
                   },

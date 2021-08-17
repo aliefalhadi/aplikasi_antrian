@@ -8,6 +8,7 @@ import 'package:aplikasi_antrian/providers/profile_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key key}) : super(key: key);
@@ -134,6 +135,44 @@ class _ProfileState extends State<Profile> {
                             }
                         );
                       }
+                    },
+                  ),
+                ),
+                vSpace(16),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: OutlineButton(
+                    child: Text("LOGOUT", style: TextStyle(color: Colors.red),),
+                    onPressed: () async{
+                      showDialog(
+                          context: context,
+                          builder: (context){
+                            return AlertDialog(
+                              content: Text("Apakah anda yakin?"),
+                              actions: [
+                                FlatButton(
+                                  child: Text("Tidak"),
+                                  onPressed: (){
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                FlatButton(
+                                  child: Text("Ya"),
+                                  onPressed: () async{
+                                    Navigator.pop(context);
+                                    EasyLoading.show(status: "Loading...", maskType: EasyLoadingMaskType.black, dismissOnTap: false);
+                                    SharedPreferences preferences = await SharedPreferences.getInstance();
+                                    preferences.clear();
+                                    EasyLoading.dismiss();
+                                    Navigator.pushNamedAndRemoveUntil(
+                                        context, 'login', (route) => false);
+                                  },
+                                )
+                              ],
+                            );
+                          }
+                      );
+
                     },
                   ),
                 )

@@ -5,19 +5,35 @@ import 'package:aplikasi_antrian/presentations/views/antrian/detail_histori_antr
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_instansi.dart';
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_layanan_instansi.dart';
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_waktu_kunjungan.dart';
+import 'package:aplikasi_antrian/presentations/views/auth/login_view.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/register_view.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home_app.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
-
+  // daftar routing aplikasi
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+      case AppRouterStrings.login:
+        return MaterialPageRoute(builder: (_) => LoginView());
+        break;
       case AppRouterStrings.register:
         return MaterialPageRoute(builder: (_) => RegisterView());
         break;
       case AppRouterStrings.home:
+        //routeSettings.arguments itu paramater untuk pindah halaman
+        //apabila halamannya memiliki beberapa tab view
+        // nanti bisa di panggil dengan
+        // Navigator.pushNamed(context, 'home',arguments:'1');
+        // Navigator.pushNamed(context, 'home');
+        // cara panjang
+        // String page;
+        // if(routeSettings.arguments == null){
+        //    page = '0';
+        // }else{
+        //   page = routeSettings.arguments;
+        // }
         String page = routeSettings.arguments == null ? '0' : routeSettings.arguments;
         return MaterialPageRoute(builder: (_) => HomeApp(page: int.parse(page),));
         break;

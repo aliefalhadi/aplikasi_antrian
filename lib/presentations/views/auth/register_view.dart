@@ -68,7 +68,7 @@ class _RegisterViewState extends State<RegisterView> {
                           decoration: InputDecoration(
                               hintText: "Nomor kartu Keluarga"
                           ),
-                          validator: (String value)=> Validations.stringNullValidation(value),
+                          validator: (String value) => Validations.stringNullValidation(value),
                           onChanged: (value) => provider.changedDataRegister(field: 'no_kk', value: value),
                         ),
                         LabelTextField(label: "NIK KTP",),
