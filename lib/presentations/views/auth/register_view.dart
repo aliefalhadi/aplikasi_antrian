@@ -184,7 +184,32 @@ class _RegisterViewState extends State<RegisterView> {
                           child: RaisedButton(
                             child: Text("Daftar"),
                             onPressed: () async{
-                              print(nom);
+                              FocusScope.of(context).unfocus();
+                              if(_formKey.currentState.validate()){
+                                EasyLoading.show(status:'Loading...', dismissOnTap: false,maskType: EasyLoadingMaskType.black);
+                                bool res = await provider.registerWithCredentials();
+                                EasyLoading.dismiss();
+                                if(res){
+                                  Alert(
+                                    context: _globalKey.currentContext,
+                                    type: AlertType.success,
+                                    title: "Registrasi Akun Berhasil",
+                                    desc: "Silahkan login menggunakan nik dan password yang telah didaftarkan",
+                                    buttons: [
+                                      DialogButton(
+                                        child: Text(
+                                          "Login",
+                                          style: TextStyle(color: Colors.white, fontSize: 20),
+                                        ),
+                                        onPressed: () => Navigator.popUntil(_globalKey.currentContext, (route) => route.isFirst),
+                                        width: 120,
+                                      )
+                                    ],
+                                  ).show();
+                                }else{
+                                  EasyLoading.showToast("Registrasi akun gagal, silahkan coba lagi");
+                                }
+                              }
                             },
                           ),
                         ),

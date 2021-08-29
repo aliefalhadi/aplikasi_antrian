@@ -89,9 +89,6 @@ class _NoHpRegisterViewState extends State<NoHpRegisterView> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-        statusBarIconBrightness: Brightness.dark));
     return BaseView<RegisterProvider>(
       builder: (context, RegisterProvider provider, child) {
         return Scaffold(
@@ -149,8 +146,9 @@ class _NoHpRegisterViewState extends State<NoHpRegisterView> {
                           decoration: InputDecoration(
                             prefixIcon: Icon(
                               Icons.phone_android,
-                              color: Color(0xFFB00c292),
+                              color: primaryColor,
                             ),
+                            labelStyle: TextStyle(color: primaryColor),
                             labelText: "Nomor Telepon/HP",
                             hintText: "Masukkan nomor hp \"082xx...\"",
                             errorText: _validate ? 'Format nomor anda salah' : null,),

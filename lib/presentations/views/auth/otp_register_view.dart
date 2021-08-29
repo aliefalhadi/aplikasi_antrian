@@ -64,6 +64,7 @@ class _OtpRegisterViewState extends State<OtpRegisterView> {
       builder: (context, provider, _) => Scaffold(
         appBar: AppBar(
           title: Text('Kode Verifikasi',),
+          backgroundColor: Colors.green,
         ),
         backgroundColor: Colors.white,
         body: Padding(
