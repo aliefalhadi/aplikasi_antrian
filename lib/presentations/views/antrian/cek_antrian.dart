@@ -90,14 +90,19 @@ class _CekAntrianState extends State<CekAntrian> {
                                 suffixIcon: Icon(Icons.arrow_drop_down_outlined)
                             ),
                             onTap: () async{
-                              var layanan = await Navigator.pushNamed(context, AppRouterStrings.pilihLayananInstansi, arguments: provider.dataCekAntrian['id_instansi'].toString());
-                              if(layanan != null){
-                                Map data = layanan;
-                                setState(() {
-                                  teLayananInstansi.text = data['nama_layanan_instansi'];
-                                  provider.changedDataCekAntrian(field: 'id_layanan_instansi',value:  data['id_layanan_instansi'].toString());
-                                });
+                              if(provider.dataCekAntrian['id_instansi'] == ''){
+                                EasyLoading.showInfo('Instansi belum dipilih');
+                              }else{
+                                var layanan = await Navigator.pushNamed(context, AppRouterStrings.pilihLayananInstansi, arguments: provider.dataCekAntrian['id_instansi'].toString());
+                                if(layanan != null){
+                                  Map data = layanan;
+                                  setState(() {
+                                    teLayananInstansi.text = data['nama_layanan_instansi'];
+                                    provider.changedDataCekAntrian(field: 'id_layanan_instansi',value:  data['id_layanan_instansi'].toString());
+                                  });
+                                }
                               }
+
                             },
                           ),
                           vSpace(16),

@@ -12,24 +12,21 @@ import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void cekAntrian() async {
-  // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  // if (sharedPreferences.containsKey('isLogin')) {
-  //   String nik = sharedPreferences.getString('nik');
-  //   String baseUrl = 'http://192.168.1.12/antrian_backend/api/v1';
-  //   var url = baseUrl+ '/notifications/cek-antrian/'+nik;
-  //
-  //   var  response = await get(url);
-  //
-  //   print('send API cron');
-  // }
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  if (sharedPreferences.containsKey('isLogin')) {
+    String nik = sharedPreferences.getString('nik');
+    String baseUrl = 'http://api.antrian.aiiviii.biz.id/v1';
+    var url = baseUrl+ '/notifications/cek-antrian/'+nik;
 
-  print('send API cron');
+    var  response = await get(url);
+
+    print('send API cron');
+  }
 
 }
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-
   final int helloAlarmID = 0;
   await AndroidAlarmManager.initialize();
 
@@ -37,7 +34,20 @@ void main() async{
   MainProvider mainProvider = locator<MainProvider>();
   mainProvider.onStartApp().then((value) async{
      runApp(App(initialRoute: value,));
-     await AndroidAlarmManager.periodic(const Duration(minutes: 1) ,helloAlarmID, cekAntrian);
+     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+     if(!sharedPreferences.containsKey('alarm3')){
+       DateTime now = DateTime.now();
+       int jam = now.hour;
+       await AndroidAlarmManager.periodic(
+         const Duration(hours: 1) ,
+         helloAlarmID,
+           cekAntrian,
+         rescheduleOnReboot: true,
+           wakeup: true ,
+           startAt: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, jam+1, 0)
+       );
+       sharedPreferences.setBool('alarm3', true);
+     }
   });
 }
 

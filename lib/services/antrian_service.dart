@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:aplikasi_antrian/models/cek_antrian_harian_model.dart';
 import 'package:aplikasi_antrian/models/cek_daftar_antrian_model.dart';
+import 'package:aplikasi_antrian/models/daftar_all_instansi_model.dart';
 import 'package:aplikasi_antrian/models/daftar_antrian_aktif_model.dart';
 import 'package:aplikasi_antrian/models/daftar_histori_antrian_model.dart';
 import 'package:aplikasi_antrian/models/daftar_instansi_model.dart';
+import 'package:aplikasi_antrian/models/daftar_layanan_instansi_detail_model.dart';
 import 'package:aplikasi_antrian/models/daftar_layanan_instansi_model.dart';
 import 'package:aplikasi_antrian/models/detail_histori_antrian_model.dart';
 import 'package:aplikasi_antrian/services/service.dart';
@@ -37,6 +39,29 @@ class AntrianService extends Service{
     }
   }
 
+  Future getDaftarAllInstansi() async {
+    try {
+      var url = '/antrians/daftar-all-instansi';
+
+      var response = await get(url);
+
+      if (response.statusCode == 200) {
+        DaftarAllInstansiModel daftarAllInstansiModel =
+        daftarAllInstansiModelFromJson(jsonEncode(response.data));
+        return daftarAllInstansiModel;
+      } else {
+        throw ('data tidak ditemukan');
+      }
+    } on SocketException catch (_) {
+      throw SocketException('no_internet');
+    } catch (error) {
+      if (error is DioError) {
+        print(error.response.statusCode);
+        throw (error.response.statusCode);
+      }
+    }
+  }
+
   Future getDaftarLayananInstansi({String idInstansi}) async {
     try {
       var url = '/antrians/daftar-layanan-instansi/'+idInstansi;
@@ -47,6 +72,29 @@ class AntrianService extends Service{
         DaftarLayananInstansiModel daftarLayananInstansiModel =
         daftarLayananInstansiModelFromJson(jsonEncode(response.data));
         return daftarLayananInstansiModel;
+      } else {
+        throw ('data tidak ditemukan');
+      }
+    } on SocketException catch (_) {
+      throw SocketException('no_internet');
+    } catch (error) {
+      if (error is DioError) {
+        print(error.response.statusCode);
+        throw (error.response.statusCode);
+      }
+    }
+  }
+
+  Future getDaftarLayananInstansiDetail({String idInstansi}) async {
+    try {
+      var url = '/antrians/daftar-layanan-instansi2/'+idInstansi;
+
+      var response = await get(url);
+
+      if (response.statusCode == 200) {
+        DaftarLayananInstansiDetailModel daftarLayananInstansiDetailModel =
+        daftarLayananInstansiDetailModelFromJson(jsonEncode(response.data));
+        return daftarLayananInstansiDetailModel;
       } else {
         throw ('data tidak ditemukan');
       }

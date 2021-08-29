@@ -96,18 +96,23 @@ class _AmbilAntrianState extends State<AmbilAntrian> {
                                 suffixIcon: Icon(Icons.arrow_drop_down_outlined)
                             ),
                             onTap: () async{
-                              var layanan = await Navigator.pushNamed(context, AppRouterStrings.pilihLayananInstansi, arguments: provider.dataAntrian['id_instansi'].toString());
-                              if(layanan != null){
-                                Map data = layanan;
-                                setState(() {
-                                  teLayananInstansi.text = data['nama_layanan_instansi'];
-                                  provider.changedDataAntrian(field: 'id_layanan_instansi',value:  data['id_layanan_instansi'].toString());
-                                  if(teWaktuKunjungan.text != ''){
-                                    teWaktuKunjungan.text = '';
-                                    provider.changedDataAntrian(field: 'waktu_kunjungan',value:  '');
-                                  }
-                                });
+                              if(provider.dataAntrian['id_instansi'] == ''){
+                                EasyLoading.showInfo('Instansi belum dipilih');
+                              }else{
+                                var layanan = await Navigator.pushNamed(context, AppRouterStrings.pilihLayananInstansi, arguments: provider.dataAntrian['id_instansi'].toString());
+                                if(layanan != null){
+                                  Map data = layanan;
+                                  setState(() {
+                                    teLayananInstansi.text = data['nama_layanan_instansi'];
+                                    provider.changedDataAntrian(field: 'id_layanan_instansi',value:  data['id_layanan_instansi'].toString());
+                                    if(teWaktuKunjungan.text != ''){
+                                      teWaktuKunjungan.text = '';
+                                      provider.changedDataAntrian(field: 'waktu_kunjungan',value:  '');
+                                    }
+                                  });
+                                }
                               }
+                              
                             },
                           ),
                           LabelTextField(
@@ -122,14 +127,19 @@ class _AmbilAntrianState extends State<AmbilAntrian> {
                                 suffixIcon: Icon(Icons.arrow_drop_down_outlined)
                             ),
                             onTap: () async{
-                              var waktu = await Navigator.pushNamed(context, AppRouterStrings.pilihWaktuKunjungan, arguments: provider.dataAntrian['id_layanan_instansi'].toString());
-                              if(waktu != null){
-                                Map data = waktu;
-                                setState(() {
-                                  teWaktuKunjungan.text = data['waktu_kunjungan'];
-                                  provider.changedDataAntrian(field: 'waktu_kunjungan',value:  data['waktu_kunjungan'].toString());
-                                });
+                              if(provider.dataAntrian['id_layanan_instansi'] == ''){
+                                EasyLoading.showInfo('Layanan instansi belum dipilih');
+                              }else{
+                                var waktu = await Navigator.pushNamed(context, AppRouterStrings.pilihWaktuKunjungan, arguments: provider.dataAntrian['id_layanan_instansi'].toString());
+                                if(waktu != null){
+                                  Map data = waktu;
+                                  setState(() {
+                                    teWaktuKunjungan.text = data['waktu_kunjungan'];
+                                    provider.changedDataAntrian(field: 'waktu_kunjungan',value:  data['waktu_kunjungan'].toString());
+                                  });
+                                }
                               }
+
                             },
                           ),
                           vSpace(16),

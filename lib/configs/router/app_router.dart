@@ -7,6 +7,7 @@ import 'package:aplikasi_antrian/presentations/views/antrian/pilih_layanan_insta
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_waktu_kunjungan.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/login_view.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/register_view.dart';
+import 'package:aplikasi_antrian/presentations/views/home/detail_instansi.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home_app.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +38,9 @@ class AppRouter {
         String page = routeSettings.arguments == null ? '0' : routeSettings.arguments;
         return MaterialPageRoute(builder: (_) => HomeApp(page: int.parse(page),));
         break;
+      case AppRouterStrings.detailInstansi:
+        String idInstansi = routeSettings.arguments;
+        return MaterialPageRoute(builder: (_) => DetailInstansi(idInstansi: idInstansi,));
       case AppRouterStrings.ambilAntrian:
         return MaterialPageRoute(builder: (_) => AmbilAntrian());
         break;

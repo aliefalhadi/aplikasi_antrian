@@ -40,7 +40,7 @@ class _LoginViewState extends State<LoginView> {
                         margin: EdgeInsets.only(top: 16),
                         child: Column(
                           children: [
-                            Text("Login", style: Theme.of(context).textTheme.headline5.copyWith(color: Colors.white),),
+                            Text("LOGIN", style: Theme.of(context).textTheme.headline5.copyWith(color: Colors.black),),
                             vSpace(16),
                             Text(
                               "Silahkan login dengan akun yang telah terdaftar pada aplikasi antrian online",

@@ -61,6 +61,18 @@ class DetailHistoriAntrian extends StatelessWidget {
                   ),
                   child: ListTile(
                     contentPadding: EdgeInsets.zero,
+                    title: Text("Loket", style: TextStyle(fontSize: 14, color: Colors.grey),),
+                    subtitle: Text(provider.detailHistoriAntrianModel.data.jenisLayanan.jlNama+" - "+provider.detailHistoriAntrianModel.data.antrian.antrianLoket, style: TextStyle(fontSize: 16,color: Colors.black)),
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: Colors.grey.withOpacity(0.2))
+                      )
+                  ),
+                  child: ListTile(
+                    contentPadding: EdgeInsets.zero,
                     title: Text("Tanggal", style: TextStyle(fontSize: 14, color: Colors.grey),),
                     subtitle: Text(DateFormat('dd MMM yyyy').format(provider.detailHistoriAntrianModel.data.antrian.antrianTgl), style: TextStyle(fontSize: 16,color: Colors.black)),
                   ),

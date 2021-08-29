@@ -19,4 +19,6 @@ class AppRouterStrings {
   static const String cekAntrian = 'antrian/cek';
 
   static const String detailHistoriAntrian = 'antrian/detail';
+
+  static const String detailInstansi = 'instansi/detail';
 }

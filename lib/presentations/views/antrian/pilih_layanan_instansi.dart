@@ -15,7 +15,7 @@ class PilihLayananInstansi extends StatelessWidget {
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            title: Text("Pilih Instansi"),
+            title: Text("Pilih Layanan Instansi"),
           ),
           body:
           provider.state == ViewState.Fetching ?
