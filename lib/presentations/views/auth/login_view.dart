@@ -126,7 +126,7 @@ class _LoginViewState extends State<LoginView> {
                           child: OutlineButton(
                             child: Text("Daftar", style: TextStyle(color: Colors.green),),
                             onPressed: (){
-                              Navigator.pushNamed(context, AppRouterStrings.register);
+                              Navigator.pushNamed(context, AppRouterStrings.registerNoHp);
                             },
                           ),
                         )

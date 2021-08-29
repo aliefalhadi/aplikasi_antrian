@@ -6,6 +6,8 @@ import 'package:aplikasi_antrian/presentations/views/antrian/pilih_instansi.dart
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_layanan_instansi.dart';
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_waktu_kunjungan.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/login_view.dart';
+import 'package:aplikasi_antrian/presentations/views/auth/no_hp_register_view.dart';
+import 'package:aplikasi_antrian/presentations/views/auth/otp_register_view.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/register_view.dart';
 import 'package:aplikasi_antrian/presentations/views/home/detail_instansi.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home.dart';
@@ -21,6 +23,13 @@ class AppRouter {
         break;
       case AppRouterStrings.register:
         return MaterialPageRoute(builder: (_) => RegisterView());
+        break;
+      case AppRouterStrings.registerNoHp:
+        return MaterialPageRoute(builder: (_) => NoHpRegisterView());
+        break;
+      case AppRouterStrings.registerOtp:
+        var noHp = routeSettings.arguments;
+        return MaterialPageRoute(builder: (_) => OtpRegisterView(noHp: noHp,));
         break;
       case AppRouterStrings.home:
         //routeSettings.arguments itu paramater untuk pindah halaman

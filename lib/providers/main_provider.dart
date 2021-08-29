@@ -3,11 +3,13 @@ import 'dart:isolate';
 import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:aplikasi_antrian/locator.dart';
 import 'package:aplikasi_antrian/services/notifikasi_service.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainProvider {
   Future<String> onStartApp() async {
+    await Firebase.initializeApp();
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     OneSignal.shared.init(
         "ba92b786-284f-4aee-b4bf-cbaa78b719b7",

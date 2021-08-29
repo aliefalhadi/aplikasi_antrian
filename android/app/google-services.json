@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "761017235714",
+    "project_id": "aplikasi-antrian-5b9cd",
+    "storage_bucket": "aplikasi-antrian-5b9cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761017235714:android:acd316428fbd3c81ab6a1b",
+        "android_client_info": {
+          "package_name": "com.example.aplikasi_antrian"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761017235714-kb1g1t175muflf0p4fggcc2g0qo1p1sn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aplikasi_antrian",
+            "certificate_hash": "df835df8133e49ce6437747f96d7971857961fc3"
+          }
+        },
+        {
+          "client_id": "761017235714-ugqk4mkocq5k87ct262hn8t3569tggla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2FQALgK_ya4WpUAFxJh9eivSZ8oj6Tqs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761017235714-ugqk4mkocq5k87ct262hn8t3569tggla.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

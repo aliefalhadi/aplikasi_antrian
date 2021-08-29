@@ -1,3 +1,4 @@
+import 'package:aplikasi_antrian/configs/constants/view_state.dart';
 import 'package:aplikasi_antrian/configs/themes/app_themes.dart';
 import 'package:aplikasi_antrian/configs/utils/validations.dart';
 import 'package:aplikasi_antrian/presentations/views/base_view.dart';
@@ -8,6 +9,7 @@ import 'package:aplikasi_antrian/constants.dart';
 import 'package:aplikasi_antrian/pages/login/register_view.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterView extends StatefulWidget {
   @override
@@ -19,15 +21,27 @@ class _RegisterViewState extends State<RegisterView> {
   bool isSecurePass = true;
   bool isSecureUlangiPass = true;
   GlobalKey<ScaffoldState> _globalKey = GlobalKey();
+  String nom;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
     return BaseView<RegisterProvider>(
+      onModelReady: (model) => model.init(),
       builder: (context, provider, child){
         return  Scaffold(
           key: _globalKey,
           backgroundColor: Colors.white,
-          body: Container(
+          body: provider.state == ViewState.Fetching ?
+              Center(child: CircularProgressIndicator(),)
+              :
+          Container(
             child: ListView(
               children: <Widget>[
                 Container(
@@ -99,6 +113,8 @@ class _RegisterViewState extends State<RegisterView> {
                         LabelTextField(label: "Nomor Handphone",),
                         TextFormField(
                           keyboardType: TextInputType.phone,
+                          initialValue: provider.dataRegister['no_hp'],
+                          readOnly: true,
                           decoration: InputDecoration(
                               hintText: "Nomor Handphone"
                           ),
@@ -142,19 +158,19 @@ class _RegisterViewState extends State<RegisterView> {
                           obscureText: isSecureUlangiPass,
                           decoration: InputDecoration(
                               hintText: "Ulangi Kata Sandi",
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                isSecureUlangiPass
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                                color: Colors.green,
-                              ),
-                              onPressed: (){
-                                setState(() {
-                                  isSecureUlangiPass = !isSecureUlangiPass;
-                                });
-                              },
-                            )
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  isSecureUlangiPass
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: Colors.green,
+                                ),
+                                onPressed: (){
+                                  setState(() {
+                                    isSecureUlangiPass = !isSecureUlangiPass;
+                                  });
+                                },
+                              )
                           ),
                           validator: (String value)=> Validations.ulangiPasswordValidation(
                               valueParent: provider.dataRegister['password'],
@@ -168,32 +184,7 @@ class _RegisterViewState extends State<RegisterView> {
                           child: RaisedButton(
                             child: Text("Daftar"),
                             onPressed: () async{
-                              FocusScope.of(context).unfocus();
-                              if(_formKey.currentState.validate()){
-                                EasyLoading.show(status:'Loading...', dismissOnTap: false,maskType: EasyLoadingMaskType.black);
-                                bool res = await provider.registerWithCredentials();
-                                EasyLoading.dismiss();
-                                if(res){
-                                  Alert(
-                                    context: _globalKey.currentContext,
-                                    type: AlertType.success,
-                                    title: "Registrasi Akun Berhasil",
-                                    desc: "Silahkan login menggunakan nik dan password yang telah didaftarkan",
-                                    buttons: [
-                                      DialogButton(
-                                        child: Text(
-                                          "Login",
-                                          style: TextStyle(color: Colors.white, fontSize: 20),
-                                        ),
-                                        onPressed: () => Navigator.popUntil(_globalKey.currentContext, (route) => route.isFirst),
-                                        width: 120,
-                                      )
-                                    ],
-                                  ).show();
-                                }else{
-                                 EasyLoading.showToast("Registrasi akun gagal, silahkan coba lagi");
-                                }
-                              }
+                              print(nom);
                             },
                           ),
                         ),

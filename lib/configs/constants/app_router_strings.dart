@@ -21,4 +21,8 @@ class AppRouterStrings {
   static const String detailHistoriAntrian = 'antrian/detail';
 
   static const String detailInstansi = 'instansi/detail';
+
+  static const String registerNoHp = 'register/no-hp';
+
+  static const String registerOtp = 'register/otp';
 }

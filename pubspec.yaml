@@ -44,6 +44,9 @@ dependencies:
   onesignal_flutter: ^2.6.4
   flutter_staggered_grid_view:
   cached_network_image:
+  firebase_core:
+  firebase_auth:
+  pin_code_fields:
 
 dev_dependencies:
   flutter_test:

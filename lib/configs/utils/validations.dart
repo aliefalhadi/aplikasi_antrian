@@ -14,4 +14,13 @@ class Validations{
     }
     return null;
   }
+
+  static String validateOtp(String value){
+    if(value.isEmpty){
+      return 'Kode harus diisi';
+    }else if(value.length<6){
+      return 'Kode harus berjumlah 6 karakter';
+    }
+    return null;
+  }
 }
