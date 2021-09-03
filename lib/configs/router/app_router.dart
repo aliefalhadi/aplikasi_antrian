@@ -5,13 +5,17 @@ import 'package:aplikasi_antrian/presentations/views/antrian/detail_histori_antr
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_instansi.dart';
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_layanan_instansi.dart';
 import 'package:aplikasi_antrian/presentations/views/antrian/pilih_waktu_kunjungan.dart';
+import 'package:aplikasi_antrian/presentations/views/auth/cek_reset_password.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/login_view.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/no_hp_register_view.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/otp_register_view.dart';
+import 'package:aplikasi_antrian/presentations/views/auth/otp_reset_view.dart';
 import 'package:aplikasi_antrian/presentations/views/auth/register_view.dart';
+import 'package:aplikasi_antrian/presentations/views/auth/reset_password_view.dart';
 import 'package:aplikasi_antrian/presentations/views/home/detail_instansi.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home.dart';
 import 'package:aplikasi_antrian/presentations/views/home/home_app.dart';
+import 'package:aplikasi_antrian/providers/auth/ResetPasswordProvider.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
@@ -30,6 +34,17 @@ class AppRouter {
       case AppRouterStrings.registerOtp:
         var noHp = routeSettings.arguments;
         return MaterialPageRoute(builder: (_) => OtpRegisterView(noHp: noHp,));
+        break;
+      case AppRouterStrings.cekResetPassword:
+        return MaterialPageRoute(builder: (_) => CekResetPassword());
+        break;
+      case AppRouterStrings.cekResetPasswordOtp:
+        var noHp = routeSettings.arguments;
+        return MaterialPageRoute(builder: (_) => OtpResetView(noHp: noHp,));
+        break;
+      case AppRouterStrings.resetPassword:
+        var noHp = routeSettings.arguments;
+        return MaterialPageRoute(builder: (_) => ResetPasswordView());
         break;
       case AppRouterStrings.home:
         //routeSettings.arguments itu paramater untuk pindah halaman

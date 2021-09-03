@@ -25,4 +25,10 @@ class AppRouterStrings {
   static const String registerNoHp = 'register/no-hp';
 
   static const String registerOtp = 'register/otp';
+
+  static const String cekResetPassword = 'lupa-password/cek';
+
+  static const String cekResetPasswordOtp = 'lupa-password/otp';
+
+  static const String resetPassword = 'lupa-password';
 }

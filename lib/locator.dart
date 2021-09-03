@@ -1,4 +1,5 @@
 import 'package:aplikasi_antrian/providers/antrian_provider.dart';
+import 'package:aplikasi_antrian/providers/auth/ResetPasswordProvider.dart';
 import 'package:aplikasi_antrian/providers/auth/login_provider.dart';
 import 'package:aplikasi_antrian/providers/auth/register_provider.dart';
 import 'package:aplikasi_antrian/providers/instansi_provider.dart';
@@ -27,6 +28,7 @@ void setupLocator() {
 
     // provider
     locator.registerFactory(() => MainProvider());
+    locator.registerFactory(() => ResetPasswordProvider());
     locator.registerFactory(() => InstansiProvider());
     locator.registerFactory(() => RegisterProvider());
     locator.registerFactory(() => LoginProvider());

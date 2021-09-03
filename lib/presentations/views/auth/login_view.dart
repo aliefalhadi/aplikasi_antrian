@@ -95,7 +95,9 @@ class _LoginViewState extends State<LoginView> {
                           children: [
                             FlatButton(
                                 padding: EdgeInsets.zero,
-                                onPressed: (){},
+                                onPressed: (){
+                                  Navigator.pushNamed(context, AppRouterStrings.cekResetPassword);
+                                },
                                 child: Text("Lupa Kata Sandi?")
                             )
                           ],

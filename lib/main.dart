@@ -59,6 +59,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primaryColor: Colors.green,
         buttonTheme: ButtonThemeData(
           buttonColor: Colors.green,
             textTheme: ButtonTextTheme.primary,

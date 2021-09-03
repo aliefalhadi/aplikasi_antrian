@@ -98,4 +98,47 @@ class AuthService extends Service{
       }
     }
   }
+
+  Future lupaPassword(var data) async {
+    try {
+      var url = '/auths/cek-reset-password';
+      print(jsonEncode(data));
+      var response = await post(url, jsonEncode(data));
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        throw (response.data['message']);
+        return false;
+
+      }
+    }catch (error) {
+      if(error is DioError){
+        throw(error.response.data['message']);
+      }
+    }
+  }
+
+  Future resetPasswordByPhone(var data) async {
+    try {
+      var url = '/auths/reset-password';
+      print(jsonEncode(data));
+      var response = await post(url, jsonEncode(data));
+      print(response.data);
+      if (response.statusCode == 200) {
+        print("ini throw");
+        return true;
+      } else {
+        throw (response.data['message']);
+        return false;
+
+      }
+    }catch (error) {
+      if(error is DioError){
+        print("ini dio");
+        print(error.response.data['message']);
+        throw(error.response.data['message']);
+      }
+    }
+  }
 }
