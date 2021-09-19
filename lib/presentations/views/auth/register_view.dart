@@ -5,11 +5,8 @@ import 'package:aplikasi_antrian/presentations/views/base_view.dart';
 import 'package:aplikasi_antrian/presentations/widgets/label_text_field.dart';
 import 'package:aplikasi_antrian/providers/auth/register_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:aplikasi_antrian/constants.dart';
-import 'package:aplikasi_antrian/pages/login/register_view.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterView extends StatefulWidget {
   @override

@@ -199,4 +199,24 @@ class AntrianProvider extends BaseProvider{
       }
     }
   }
+
+  Future checkAvailableAntrian() async{
+    DateTime date = DateTime.now();
+    if(date.weekday == 6 || date.weekday == 7){
+      return true;
+    }
+
+    Response res = await _antrianService.getHariLibur(
+      tahun: date.year.toString(),
+      bulan: date.month.toString(),
+      tgl: date.day.toString(),
+    );
+
+    List<dynamic> data = res.data;
+    if(data.isNotEmpty){
+      return true;
+    }
+
+    return false;
+  }
 }

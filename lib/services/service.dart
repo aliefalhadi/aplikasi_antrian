@@ -32,6 +32,25 @@ class Service {
     }
   }
 
+  Future getWithoutBaseUrl(String url) async {
+    try {
+      print(url);
+      if (await locator<ApiInterceptors>().checkConnection()) {
+        final response =
+        dio.get(url, options: Options(headers: {"requiresToken": false}));
+        return response;
+      } else {
+        print('no');
+        throw TimeoutException('no_internet');
+      }
+    } on TimeoutException catch (e) {
+      throw SocketException('no_internet');
+    } catch (error) {
+      log(error.toString(), name: 'error');
+      errorDioHandler(error);
+    }
+  }
+
   Future postLogin2(String url, var data) async {
     try{
       url = baseUrl + url;

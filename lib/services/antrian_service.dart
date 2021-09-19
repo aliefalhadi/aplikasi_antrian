@@ -267,4 +267,25 @@ class AntrianService extends Service{
       }
     }
   }
+
+  Future getHariLibur({String tahun, String bulan, String tgl}) async {
+    try {
+      var url = 'https://holidays.abstractapi.com/v1/?api_key=4612c13bb8844d6a86fe0f1639eae25b&country=ID&year='+tahun+'&month='+bulan+'&day='+tgl;
+
+      Response response = await getWithoutBaseUrl(url);
+
+      if (response.statusCode == 200) {
+        return response;
+      } else {
+        throw ('data tidak ditemukan');
+      }
+    } on SocketException catch (_) {
+      throw SocketException('no_internet');
+    } catch (error) {
+      if (error is DioError) {
+        print(error.response.statusCode);
+        throw (error.response.statusCode);
+      }
+    }
+  }
 }

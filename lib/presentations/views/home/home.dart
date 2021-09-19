@@ -1,8 +1,13 @@
 import 'package:aplikasi_antrian/configs/constants/app_router_strings.dart';
+import 'package:aplikasi_antrian/configs/themes/app_colors.dart';
+import 'package:aplikasi_antrian/locator.dart';
 import 'package:aplikasi_antrian/pages/antrian_online.dart';
 import 'package:aplikasi_antrian/pages/antrian_online_add.dart';
 import 'package:aplikasi_antrian/pages/fasilitas.dart';
+import 'package:aplikasi_antrian/providers/antrian_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'instansi.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -87,8 +92,50 @@ class HomeScreen extends StatelessWidget {
             Column(
               children: [
                 InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(AppRouterStrings.ambilAntrian);
+                  onTap: () async{
+                    EasyLoading.show(status: 'Loading...',maskType: EasyLoadingMaskType.black,dismissOnTap: false);
+                    bool libur = await locator<AntrianProvider>().checkAvailableAntrian();
+                    EasyLoading.dismiss();
+                    if(libur){
+                      Alert(
+                        context: context,
+                        style: AlertStyle(
+                          animationType: AnimationType.fromTop,
+                          isCloseButton: false,
+                          isOverlayTapDismiss: false,
+                          descStyle: TextStyle(fontWeight: FontWeight.bold),
+                          descTextAlign: TextAlign.center,
+                          animationDuration: Duration(milliseconds: 400),
+                          alertBorder: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(0.0),
+                            side: BorderSide(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          titleStyle: TextStyle(
+                            color: Colors.black,
+                          ),
+                          alertAlignment: Alignment.center,
+                        ),
+                        type: AlertType.info,
+                        title: "Maaf, pengambilan nomor antrian saat ini sedang ditutup",
+                        desc: null,
+                        buttons: [
+                          DialogButton(
+                            child: Text(
+                              "OK",
+                              style: TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () => Navigator.pop(context),
+                            color: Color.fromRGBO(0, 179, 134, 1.0),
+                            radius: BorderRadius.circular(0.0),
+                          ),
+                        ],
+                      ).show();
+                    }else{
+                      Navigator.of(context).pushNamed(AppRouterStrings.ambilAntrian);
+                    }
+
                   },
                   child: Image.asset(
                     'images/qr.png',

@@ -18,7 +18,7 @@ void cekAntrian() async {
     String baseUrl = 'http://api.antrian.aiiviii.biz.id/v1';
     var url = baseUrl+ '/notifications/cek-antrian/'+nik;
 
-    var  response = await get(url);
+    // var  response = await get(url);
 
     print('send API cron');
   }
